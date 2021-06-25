@@ -336,6 +336,7 @@ module Puppet::Pops
   #   - 'knockout_prefix' Set to string value to signify prefix which deletes elements from existing element. Defaults is _undef_
   #   - 'sort_merged_arrays' Set to _true_ to sort all arrays that are merged together. Default is _false_
   #   - 'merge_hash_arrays' Set to _true_ to merge hashes within arrays. Default is _false_
+  #   - 'keep_array_duplicates' Set to _true_ to preserve duplicate values within arrays. If _false_ array merges work like sets. Default is _false_
   #
   # Selected Options Details:
   # :knockout_prefix => The purpose of this is to provide a way to remove elements
@@ -356,6 +357,11 @@ module Puppet::Pops
   #   dest   = {:x => [{:z => 2}]}
   #   dest.deep_merge!(source, {:merge_hash_arrays => true})
   #   Results: {:x => [{:y => 1, :z => 2}]}
+  # :keep_array_duplicates => merge hashes within arrays
+  #   source = {:x => [ 2, 3 ]}
+  #   dest   = {:x => [ 1, 2 ]}
+  #   dest.deep_merge!(source, {:keep_array_duplicates => true})
+  #   Results: {:x => [ 1, 2, 2, 3 ]}
   #
   class DeepMergeStrategy < MergeStrategy
     INSTANCE = self.new(EMPTY_HASH)
@@ -397,6 +403,7 @@ module Puppet::Pops
                                                          'merge_debug=>Optional[Boolean],'\
                                                          'merge_hash_arrays=>Optional[Boolean],'\
                                                          'sort_merged_arrays=>Optional[Boolean],'\
+                                                         'keep_array_duplicates=>Optional[Boolean],'\
                                                          '}]')
       end
     end

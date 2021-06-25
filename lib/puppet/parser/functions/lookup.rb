@@ -104,6 +104,10 @@ but can adjust the merge with additional options. The available options are:
     merged together. Defaults to `false`.
     * `'merge_hash_arrays'` (boolean) --- Whether to merge hashes within arrays.
     Defaults to `false`.
+    * `'keep_array_duplicates'` (boolean) --- Whether duplicated values in an array
+    are merged together. Defaults to false - which implies array merges work more
+    like a set than an array
+    Defaults to `false`.
 
 #### Examples
 
